@@ -12,8 +12,6 @@ def preload_img(path):
     x = int(img.shape[0] % SHRED_SIZE)
     y = int(img.shape[1] % SHRED_SIZE)
 
-    if not (img.shape[1] - y) % 2 == 0 or (img.shape[0] - x) % 2 == 0:
-        return False
     return img[0 : img.shape[0] - x, 0 : img.shape[1] - y]
 
 
@@ -33,9 +31,7 @@ def shredder(img, width):
 
 def app():
     img = preload_img("1.jpg")
-    if isinstance(img, bool):
-        print("Please provide different size value!")
-        return
+
     img1, img2 = shredder(np.rot90(img, 1), SHRED_SIZE)
     output = merge(img1, img2, 0)
 
